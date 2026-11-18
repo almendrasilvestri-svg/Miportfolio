@@ -6,42 +6,67 @@
 <title>Mi cartera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#EDF0F3;--sf:#FFFFFF;--ink:#14202B;--mut:#5C6B78;--line:#D5DBE1;--ac:#0E6E8C;--up:#17794A;--dn:#B3261E;color-scheme:light;
+:root{--bg:#F3F5F8;--sf:#FFFFFF;--ink:#0E1621;--mut:#6A7686;--line:#E4E8EE;--ac:#2F6BFF;--onac:#FFFFFF;--up:#0F9D6B;--dn:#E5484D;--c1:#4C7DFF;--c2:#F5A524;--c3:#12B5A6;--shadow:0 1px 2px rgba(14,22,33,.05),0 10px 28px rgba(14,22,33,.06);color-scheme:light;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F161C;--sf:#172029;--ink:#E7ECF0;--mut:#93A1AD;--line:#2A3641;--ac:#5CB8D4;--up:#4CC38A;--dn:#FF8A80;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0F161C;--sf:#172029;--ink:#E7ECF0;--mut:#93A1AD;--line:#2A3641;--ac:#5CB8D4;--up:#4CC38A;--dn:#FF8A80;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0F16;--sf:#111925;--ink:#EAF0F7;--mut:#8A98AA;--line:#1F2A39;--ac:#6E96FF;--onac:#0A0F16;--up:#2DD4A0;--dn:#FF7A7F;--c1:#6E96FF;--c2:#FFC24B;--c3:#2DD4C4;--shadow:none;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A0F16;--sf:#111925;--ink:#EAF0F7;--mut:#8A98AA;--line:#1F2A39;--ac:#6E96FF;--onac:#0A0F16;--up:#2DD4A0;--dn:#FF7A7F;--c1:#6E96FF;--c2:#FFC24B;--c3:#2DD4C4;--shadow:none;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-variant-numeric:tabular-nums}
-main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
-header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:18px}
-h1{margin:0;font-size:1.25rem;font-weight:600}
-.date{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:.9rem}
-input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 10px;min-width:0}
-.date input{width:auto}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.45 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+main{max-width:1000px;margin:0 auto;padding:22px 16px 56px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+h2{margin:0 0 14px;font-size:.95rem;font-weight:700}
+.date{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:.88rem}
+input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid transparent;border-radius:10px;padding:10px 12px;min-width:0}
+.date input{width:auto;background:var(--sf);border-color:var(--line)}
 :focus-visible{outline:2px solid var(--ac);outline-offset:1px}
-.sum{display:grid;gap:14px;background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:18px 16px;margin-bottom:16px}
-.sum .l{display:block;color:var(--mut);font-size:.85rem}
-.big{font-size:clamp(2rem,9vw,3rem);font-weight:600;line-height:1.1;letter-spacing:-.02em}
-.sum b{font-size:1.2rem;font-weight:600}
-.sum small{margin-left:8px;font-size:.95rem;font-weight:500}
-.up{color:var(--up)}.dn{color:var(--dn)}
-@media(min-width:760px){.sum{grid-template-columns:1.6fr 1fr 1fr;align-items:end}}
-.list{background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:0 16px}
+.hero{background:linear-gradient(135deg,#0E1621 0%,#1B2F4D 100%);color:#fff;border-radius:22px;padding:22px 20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.hl{display:block;color:rgba(255,255,255,.62);font-size:.82rem;font-weight:600}
+.hv{font-size:clamp(2.2rem,10vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 10px}
+.pill{display:inline-block;border-radius:999px;padding:4px 12px;font-size:.9rem;font-weight:700}
+.pill:empty{display:none}
+.pill.up{background:rgba(53,214,161,.16);color:#35D6A1}
+.pill.dn{background:rgba(255,138,143,.16);color:#FF8A8F}
+.hs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.hs b{font-size:1.15rem;font-weight:700}
+.hs .up{color:#35D6A1}.hs .dn{color:#FF8A8F}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.charts{display:grid;gap:14px;margin-bottom:14px}
+@media(min-width:760px){.charts{grid-template-columns:1fr 1fr}}
+.dwrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+#donut{width:150px;height:150px;flex:none}
+#donut text{fill:var(--ink);font-family:inherit}
+.dc1{font-size:20px;font-weight:800}
+.dc2{font-size:7.5px;fill:var(--mut)!important;font-weight:600}
+#leg{flex:1;min-width:180px;display:grid;gap:10px}
+.lg{display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;align-items:center}
+.lg .dot{width:10px;height:10px;border-radius:50%}
+.lg .nm{font-weight:600}
+.lg .pc{font-weight:800}
+.lg .vl{grid-column:2/4;color:var(--mut);font-size:.82rem;margin-top:-2px}
+#wts{display:grid;gap:12px}
+.wr{display:grid;grid-template-columns:76px 1fr 54px;align-items:center;gap:10px;font-size:.9rem}
+.wr .wt{font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.wr .bar{height:8px;border-radius:99px;background:var(--bg);overflow:hidden}
+.wr .bar i{display:block;height:100%;border-radius:99px}
+.wr .wp{text-align:right;font-weight:700}
+.list{padding:0 18px}
 .head{display:none}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
 .row:last-child{border-bottom:0}
 .f{min-width:0}
-.f .l{display:block;color:var(--mut);font-size:.8rem;margin-bottom:3px}
+.f .l{display:block;color:var(--mut);font-size:.78rem;font-weight:600;margin-bottom:4px}
 .f.t,.del{grid-column:1/-1}
-.f.t input{font-weight:600;text-transform:uppercase}
-.out .v{display:block;font-weight:500;padding:9px 0}
-.del{justify-self:end;background:none;border:0;color:var(--mut);font:inherit;font-size:.9rem;padding:4px 0;cursor:pointer;text-decoration:underline}
+.f.t input{font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+.out .v{display:block;font-weight:700;padding:10px 0}
+.del{justify-self:end;background:none;border:0;color:var(--mut);font:inherit;font-size:.85rem;font-weight:600;padding:4px 0;cursor:pointer}
+.up{color:var(--up)}.dn{color:var(--dn)}
 @media(min-width:760px){
  .head,.row{grid-template-columns:1fr .9fr .9fr .9fr 1.2fr 1.1fr 1.3fr auto;align-items:center;gap:10px}
- .head{display:grid;padding:12px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:.8rem}
+ .head{display:grid;padding:14px 0 10px;border-bottom:1px solid var(--line);color:var(--mut);font-size:.78rem;font-weight:600}
  .row{padding:8px 0}
  .f.t,.del{grid-column:auto}
  .f .l{display:none}
@@ -50,19 +75,17 @@ input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);borde
  .head .x,.del{width:56px}
 }
 .f.t{position:relative}
-.sug{position:absolute;z-index:5;left:0;right:0;top:100%;margin-top:2px;background:var(--sf);border:1px solid var(--line);border-radius:6px;max-height:240px;overflow:auto;box-shadow:0 6px 18px rgba(0,0,0,.15)}
-.sug button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;padding:10px;cursor:pointer}
+.sug{position:absolute;z-index:5;left:0;right:0;top:100%;margin-top:4px;background:var(--sf);border:1px solid var(--line);border-radius:12px;max-height:260px;overflow:auto;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.sug button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;padding:11px 12px;cursor:pointer}
 .sug button:last-child{border-bottom:0}
 .sug small{color:var(--mut)}
-.empty{padding:28px 0;color:var(--mut)}
-.note{color:var(--mut);font-size:.85rem;margin:10px 2px}
-.bar{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
-button.p{font:inherit;font-weight:600;border:0;border-radius:6px;padding:10px 16px;background:var(--ac);color:#fff;cursor:pointer}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) button.p{color:#0F161C}}
-:root[data-theme="dark"] button.p{color:#0F161C}
-details{margin-top:18px;background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
-summary{cursor:pointer;font-weight:600}
-textarea{width:100%;min-height:120px;margin:12px 0 10px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px}
+.empty{padding:30px 0;color:var(--mut)}
+.note{color:var(--mut);font-size:.84rem;margin:10px 2px}
+.bar2{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+button.p{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px 20px;background:var(--ac);color:var(--onac);cursor:pointer}
+details{margin-top:18px}
+summary{cursor:pointer;font-weight:700}
+textarea{width:100%;min-height:120px;margin:12px 0 10px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid transparent;border-radius:12px;padding:12px}
 </style>
 </head>
 <body>
@@ -72,23 +95,33 @@ textarea{width:100%;min-height:120px;margin:12px 0 10px;font:inherit;color:var(-
  <label class="date">Precios de cierre al <input type="date" id="fecha"></label>
 </header>
 
-<section class="sum" aria-live="polite">
- <div><span class="l">Valor actual</span><span class="big" id="tv">–</span></div>
- <div><span class="l">Costo</span><b id="tc">–</b></div>
- <div><span class="l">Resultado</span><b id="tr">–</b><small id="tp"></small></div>
+<section class="hero" aria-live="polite">
+ <span class="hl">Valor actual</span>
+ <div class="hv" id="tv">–</div>
+ <span class="pill" id="tp"></span>
+ <div class="hs">
+  <div><span class="hl">Costo</span><b id="tc">–</b></div>
+  <div><span class="hl">Resultado</span><b id="tr">–</b></div>
+ </div>
+</section>
+
+<section class="charts" id="charts" hidden>
+ <div class="card"><h2>Composición por tipo</h2>
+  <div class="dwrap"><div id="donut"></div><div id="leg"></div></div></div>
+ <div class="card"><h2>Peso por activo</h2><div id="wts"></div></div>
 </section>
 
 <p class="note" id="stat"></p>
-<div class="list">
+<div class="card list">
  <div class="head"><span>Ticker</span><span>Nominales</span><span>Precio de compra</span><span>Precio de cierre</span><span>Tipo</span><span class="r">Valor actual</span><span class="r">Resultado</span><span class="x"></span></div>
  <div id="rows"></div>
 </div>
 <p class="note" id="warn"></p>
 
-<div class="bar"><button class="p" id="add" type="button">Agregar activo</button></div>
+<div class="bar2"><button class="p" id="add" type="button">Agregar activo</button></div>
 <p class="note">Escribí los decimales con coma (1.234,56). Títulos públicos y obligaciones negociables cotizan cada 100 nominales: el tipo lo aplica solo. Los importes quedan en la moneda de los precios que cargues.</p>
 
-<details id="pd">
+<details class="card" id="pd">
  <summary>Pegar cartera desde una planilla</summary>
  <textarea id="paste" placeholder="Una fila por activo, en este orden:&#10;ticker  nominales  precio de compra  precio de cierre  tipo: título, on o acción (opcional)"></textarea>
  <button class="p" id="load" type="button">Cargar filas</button>
@@ -108,11 +141,14 @@ function num(s){s=String(s==null?"":s).trim().replace(/\s/g,"");if(!s)return NaN
 function kindOf(s){s=String(s||"").toLowerCase();if(/^(tp|tit|bono|letra)/.test(s))return "tp";if(/^(on|obl)/.test(s))return "on";if(/^(ac|ced|acc)/.test(s))return "ac";return "";}
 function fmt(n){return isFinite(n)?n.toLocaleString("es-AR",{minimumFractionDigits:2,maximumFractionDigits:2}):"–";}
 function sgn(n){return (n>0?"+":n<0?"−":"")+fmt(Math.abs(n));}
+function pct1(n){return n.toLocaleString("es-AR",{maximumFractionDigits:1})+"%";}
 function cls(el,n){el.classList.remove("up","dn");if(n>0)el.classList.add("up");else if(n<0)el.classList.add("dn");}
+var KL={tp:"Título público",on:"Oblig. negociable",ac:"Acción / CEDEAR"};
+var ML={ARS:"pesos",USD:"USD",EXT:"USD CCL"};
+var CK={tp:"var(--c1)",on:"var(--c2)",ac:"var(--c3)"};
 
 var rowsEl=document.getElementById("rows"),els=new Map();
 var FIELDS=[["t","Ticker"],["n","Nominales"],["pc","Precio de compra"],["pa","Precio de cierre"],["k","Tipo"]];
-
 var KINDS=[["","Elegí tipo"],["tp","Título público"],["on","Oblig. negociable"],["ac","Acción / CEDEAR"]];
 function mkSel(){var s=document.createElement("select");KINDS.forEach(function(k){var o=document.createElement("option");o.value=k[0];o.textContent=k[1];s.appendChild(o);});return s;}
 function build(r){
@@ -144,8 +180,39 @@ function render(){
  S.rows.forEach(function(r){rowsEl.appendChild(build(r));});
  calc();
 }
+
+var chartsEl=document.getElementById("charts"),donut=document.getElementById("donut"),leg=document.getElementById("leg"),wts=document.getElementById("wts");
+function el(tag,cn,txt){var e=document.createElement(tag);if(cn)e.className=cn;if(txt!=null)e.textContent=txt;return e;}
+function charts(parts,total){
+ if(!parts.length||!(total>0)){chartsEl.hidden=true;return;}
+ chartsEl.hidden=false;
+ var by={tp:0,on:0,ac:0};parts.forEach(function(p){by[p.k]+=p.v;});
+ var keys=["tp","on","ac"].filter(function(k){return by[k]>0;});
+ var C=2*Math.PI*44,off=0;
+ var svg='<svg viewBox="0 0 120 120" role="img" aria-label="Composición por tipo"><circle cx="60" cy="60" r="44" fill="none" stroke-width="16" style="stroke:var(--line)"/>';
+ keys.forEach(function(k){
+  var len=by[k]/total*C,gap=keys.length>1?2:0;
+  svg+='<circle cx="60" cy="60" r="44" fill="none" stroke-width="16" style="stroke:'+CK[k]+'" stroke-dasharray="'+Math.max(len-gap,0.5)+' '+C+'" stroke-dashoffset="'+(-off)+'" transform="rotate(-90 60 60)"/>';
+  off+=len;
+ });
+ svg+='<text x="60" y="61" text-anchor="middle" class="dc1">'+parts.length+'</text><text x="60" y="73" text-anchor="middle" class="dc2">'+(parts.length===1?"activo":"activos")+'</text></svg>';
+ donut.innerHTML=svg;
+ leg.innerHTML="";
+ keys.forEach(function(k){
+  var g=el("div","lg"),dot=el("span","dot");dot.style.background=CK[k];
+  g.appendChild(dot);g.appendChild(el("span","nm",KL[k]));g.appendChild(el("span","pc",pct1(by[k]/total*100)));
+  g.appendChild(el("span","vl",fmt(by[k])));leg.appendChild(g);
+ });
+ wts.innerHTML="";
+ parts.slice().sort(function(a,b){return b.v-a.v;}).slice(0,8).forEach(function(p){
+  var w=el("div","wr"),b=el("div","bar"),i=document.createElement("i"),pc=p.v/total*100;
+  i.style.width=Math.max(pc,1)+"%";i.style.background=CK[p.k];b.appendChild(i);
+  w.appendChild(el("span","wt",p.t||"–"));w.appendChild(b);w.appendChild(el("span","wp",pct1(pc)));wts.appendChild(w);
+ });
+}
+
 function calc(){
- var tc=0,tv=0,ok=0,miss=0;
+ var tc=0,tv=0,ok=0,miss=0,parts=[];
  S.rows.forEach(function(r){
   var n=num(r.n),pc=num(r.pc),pa=num(r.pa),b=r.k==="ac"?1:100;
   var e=els.get(r);if(!e)return;
@@ -153,7 +220,7 @@ function calc(){
    var c=n*pc/b,v=n*pa/b,res=v-c,p=c?res/c*100:NaN;
    e.v.textContent=fmt(v);
    e.r.textContent=sgn(res)+(isFinite(p)?"  ("+sgn(p)+"%)":"");cls(e.r,res);
-   tc+=c;tv+=v;ok++;
+   tc+=c;tv+=v;ok++;parts.push({t:r.t,k:r.k,v:v});
   }else{e.v.textContent="–";e.r.textContent="–";cls(e.r,0);if(r.t||r.n||r.pc||r.pa)miss++;}
  });
  var res=tv-tc;
@@ -161,8 +228,9 @@ function calc(){
  document.getElementById("tc").textContent=ok?fmt(tc):"–";
  var tr=document.getElementById("tr"),tp=document.getElementById("tp");
  tr.textContent=ok?sgn(res):"–";cls(tr,res);
- tp.textContent=ok&&tc?sgn(res/tc*100)+"%":"";cls(tp,res);
+ if(ok&&tc){tp.textContent=sgn(res/tc*100)+"%";tp.className="pill "+(res>=0?"up":"dn");}else{tp.textContent="";tp.className="pill";}
  document.getElementById("warn").textContent=miss?(miss===1?"1 activo con datos incompletos no está incluido en los totales.":miss+" activos con datos incompletos no están incluidos en los totales."):"";
+ charts(parts,tv);
 }
 var fe=document.getElementById("fecha");fe.value=S.fecha||"";
 fe.addEventListener("input",function(){S.fecha=fe.value;save();});
@@ -180,9 +248,8 @@ document.getElementById("load").addEventListener("click",function(){
  });
  if(added){ta.value="";document.getElementById("pd").open=false;render();save();}
 });
+
 var CAT=[],MAP={};
-var KL={tp:"Título público",on:"Oblig. negociable",ac:"Acción / CEDEAR"};
-var ML={ARS:"pesos",USD:"USD",EXT:"USD CCL"};
 function px(v){return String(v).replace(".",",");}
 function attachSug(w,i,r){
  var box=document.createElement("div");box.className="sug";box.hidden=true;w.appendChild(box);
@@ -214,9 +281,7 @@ fetch("data.json",{cache:"no-store"}).then(function(x){if(!x.ok)throw 0;return x
  if(d.fecha){S.fecha=d.fecha;fe.value=d.fecha;}
  st.textContent="Precios de cierre de BYMA al "+fechaAR(d.fecha)+(n?" · actualizados en "+n+(n===1?" activo.":" activos."):".");
  render();save();
-}).catch(function(){
- st.textContent="No se pudo cargar la lista de precios de BYMA. Podés cargar los precios a mano.";
-});
+}).catch(function(){st.textContent="";});
 render();
 })();
 </script>
