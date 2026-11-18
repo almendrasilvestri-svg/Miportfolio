@@ -1,0 +1,27 @@
+name: Precios BYMA
+
+on:
+  schedule:
+    # 21:05 UTC = 18:05 hs Argentina, de lunes a viernes
+    - cron: "5 21 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  precios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python fetch_prices.py
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data.json
+          git diff --cached --quiet || (git commit -m "Precios de cierre" && git push)

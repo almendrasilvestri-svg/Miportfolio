@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi cartera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EDF0F3;--sf:#FFFFFF;--ink:#14202B;--mut:#5C6B78;--line:#D5DBE1;--ac:#0E6E8C;--up:#17794A;--dn:#B3261E;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F161C;--sf:#172029;--ink:#E7ECF0;--mut:#93A1AD;--line:#2A3641;--ac:#5CB8D4;--up:#4CC38A;--dn:#FF8A80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F161C;--sf:#172029;--ink:#E7ECF0;--mut:#93A1AD;--line:#2A3641;--ac:#5CB8D4;--up:#4CC38A;--dn:#FF8A80;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-variant-numeric:tabular-nums}
+main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:18px}
+h1{margin:0;font-size:1.25rem;font-weight:600}
+.date{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:.9rem}
+input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 10px;min-width:0}
+.date input{width:auto}
+:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.sum{display:grid;gap:14px;background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:18px 16px;margin-bottom:16px}
+.sum .l{display:block;color:var(--mut);font-size:.85rem}
+.big{font-size:clamp(2rem,9vw,3rem);font-weight:600;line-height:1.1;letter-spacing:-.02em}
+.sum b{font-size:1.2rem;font-weight:600}
+.sum small{margin-left:8px;font-size:.95rem;font-weight:500}
+.up{color:var(--up)}.dn{color:var(--dn)}
+@media(min-width:760px){.sum{grid-template-columns:1.6fr 1fr 1fr;align-items:end}}
+.list{background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:0 16px}
+.head{display:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.f{min-width:0}
+.f .l{display:block;color:var(--mut);font-size:.8rem;margin-bottom:3px}
+.f.t,.del{grid-column:1/-1}
+.f.t input{font-weight:600;text-transform:uppercase}
+.out .v{display:block;font-weight:500;padding:9px 0}
+.del{justify-self:end;background:none;border:0;color:var(--mut);font:inherit;font-size:.9rem;padding:4px 0;cursor:pointer;text-decoration:underline}
+@media(min-width:760px){
+ .head,.row{grid-template-columns:1fr .9fr .9fr .9fr 1.2fr 1.1fr 1.3fr auto;align-items:center;gap:10px}
+ .head{display:grid;padding:12px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:.8rem}
+ .row{padding:8px 0}
+ .f.t,.del{grid-column:auto}
+ .f .l{display:none}
+ .out{text-align:right}
+ .head .r{text-align:right}
+ .head .x,.del{width:56px}
+}
+.f.t{position:relative}
+.sug{position:absolute;z-index:5;left:0;right:0;top:100%;margin-top:2px;background:var(--sf);border:1px solid var(--line);border-radius:6px;max-height:240px;overflow:auto;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.sug button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;padding:10px;cursor:pointer}
+.sug button:last-child{border-bottom:0}
+.sug small{color:var(--mut)}
+.empty{padding:28px 0;color:var(--mut)}
+.note{color:var(--mut);font-size:.85rem;margin:10px 2px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+button.p{font:inherit;font-weight:600;border:0;border-radius:6px;padding:10px 16px;background:var(--ac);color:#fff;cursor:pointer}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) button.p{color:#0F161C}}
+:root[data-theme="dark"] button.p{color:#0F161C}
+details{margin-top:18px;background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{cursor:pointer;font-weight:600}
+textarea{width:100%;min-height:120px;margin:12px 0 10px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px}
+</style>
+</head>
+<body>
+<main>
+<header>
+ <h1>Mi cartera</h1>
+ <label class="date">Precios de cierre al <input type="date" id="fecha"></label>
+</header>
+
+<section class="sum" aria-live="polite">
+ <div><span class="l">Valor actual</span><span class="big" id="tv">–</span></div>
+ <div><span class="l">Costo</span><b id="tc">–</b></div>
+ <div><span class="l">Resultado</span><b id="tr">–</b><small id="tp"></small></div>
+</section>
+
+<p class="note" id="stat"></p>
+<div class="list">
+ <div class="head"><span>Ticker</span><span>Nominales</span><span>Precio de compra</span><span>Precio de cierre</span><span>Tipo</span><span class="r">Valor actual</span><span class="r">Resultado</span><span class="x"></span></div>
+ <div id="rows"></div>
+</div>
+<p class="note" id="warn"></p>
+
+<div class="bar"><button class="p" id="add" type="button">Agregar activo</button></div>
+<p class="note">Escribí los decimales con coma (1.234,56). Títulos públicos y obligaciones negociables cotizan cada 100 nominales: el tipo lo aplica solo. Los importes quedan en la moneda de los precios que cargues.</p>
+
+<details id="pd">
+ <summary>Pegar cartera desde una planilla</summary>
+ <textarea id="paste" placeholder="Una fila por activo, en este orden:&#10;ticker  nominales  precio de compra  precio de cierre  tipo: título, on o acción (opcional)"></textarea>
+ <button class="p" id="load" type="button">Cargar filas</button>
+</details>
+</main>
+
+<script>
+(function(){
+var KEY="cartera-v1";
+var S={fecha:new Date().toISOString().slice(0,10),rows:[]};
+try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);if(o&&Array.isArray(o.rows))S=o;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function num(s){s=String(s==null?"":s).trim().replace(/\s/g,"");if(!s)return NaN;
+ if(s.indexOf(",")>-1)s=s.replace(/\./g,"").replace(",",".");
+ else if((s.match(/\./g)||[]).length>1)s=s.replace(/\./g,"");
+ return parseFloat(s);}
+function kindOf(s){s=String(s||"").toLowerCase();if(/^(tp|tit|bono|letra)/.test(s))return "tp";if(/^(on|obl)/.test(s))return "on";if(/^(ac|ced|acc)/.test(s))return "ac";return "";}
+function fmt(n){return isFinite(n)?n.toLocaleString("es-AR",{minimumFractionDigits:2,maximumFractionDigits:2}):"–";}
+function sgn(n){return (n>0?"+":n<0?"−":"")+fmt(Math.abs(n));}
+function cls(el,n){el.classList.remove("up","dn");if(n>0)el.classList.add("up");else if(n<0)el.classList.add("dn");}
+
+var rowsEl=document.getElementById("rows"),els=new Map();
+var FIELDS=[["t","Ticker"],["n","Nominales"],["pc","Precio de compra"],["pa","Precio de cierre"],["k","Tipo"]];
+
+var KINDS=[["","Elegí tipo"],["tp","Título público"],["on","Oblig. negociable"],["ac","Acción / CEDEAR"]];
+function mkSel(){var s=document.createElement("select");KINDS.forEach(function(k){var o=document.createElement("option");o.value=k[0];o.textContent=k[1];s.appendChild(o);});return s;}
+function build(r){
+ var row=document.createElement("div");row.className="row";
+ FIELDS.forEach(function(f){
+  var w=document.createElement("div");w.className="f"+(f[0]==="t"?" t":"");
+  var l=document.createElement("span");l.className="l";l.textContent=f[1];
+  var i=f[0]==="k"?mkSel():document.createElement("input");i.value=r[f[0]]||"";
+  i.setAttribute("aria-label",f[1]);
+  if(f[0]==="t"){i.autocapitalize="characters";i.autocomplete="off";i.placeholder="Ej.: GD30";}
+  else if(f[0]!=="k"){i.inputMode="decimal";i.autocomplete="off";}
+  i.addEventListener("input",function(){r[f[0]]=f[0]==="t"?i.value.toUpperCase():i.value;calc();save();});
+  w.appendChild(l);w.appendChild(i);row.appendChild(w);
+  if(f[0]==="t")attachSug(w,i,r);
+ });
+ var o1=document.createElement("div");o1.className="f out";
+ o1.innerHTML='<span class="l">Valor actual</span><span class="v"></span>';
+ var o2=document.createElement("div");o2.className="f out";
+ o2.innerHTML='<span class="l">Resultado</span><span class="v"></span>';
+ var d=document.createElement("button");d.type="button";d.className="del";d.textContent="Quitar";
+ d.addEventListener("click",function(){S.rows=S.rows.filter(function(x){return x!==r;});render();save();});
+ row.appendChild(o1);row.appendChild(o2);row.appendChild(d);
+ els.set(r,{v:o1.querySelector(".v"),r:o2.querySelector(".v")});
+ return row;
+}
+function render(){
+ rowsEl.innerHTML="";els=new Map();
+ if(!S.rows.length){var e=document.createElement("div");e.className="empty";e.textContent="Todavía no cargaste activos. Agregá uno o pegá tu cartera desde una planilla.";rowsEl.appendChild(e);}
+ S.rows.forEach(function(r){rowsEl.appendChild(build(r));});
+ calc();
+}
+function calc(){
+ var tc=0,tv=0,ok=0,miss=0;
+ S.rows.forEach(function(r){
+  var n=num(r.n),pc=num(r.pc),pa=num(r.pa),b=r.k==="ac"?1:100;
+  var e=els.get(r);if(!e)return;
+  if(r.k&&isFinite(n)&&isFinite(pc)&&isFinite(pa)){
+   var c=n*pc/b,v=n*pa/b,res=v-c,p=c?res/c*100:NaN;
+   e.v.textContent=fmt(v);
+   e.r.textContent=sgn(res)+(isFinite(p)?"  ("+sgn(p)+"%)":"");cls(e.r,res);
+   tc+=c;tv+=v;ok++;
+  }else{e.v.textContent="–";e.r.textContent="–";cls(e.r,0);if(r.t||r.n||r.pc||r.pa)miss++;}
+ });
+ var res=tv-tc;
+ document.getElementById("tv").textContent=ok?fmt(tv):"–";
+ document.getElementById("tc").textContent=ok?fmt(tc):"–";
+ var tr=document.getElementById("tr"),tp=document.getElementById("tp");
+ tr.textContent=ok?sgn(res):"–";cls(tr,res);
+ tp.textContent=ok&&tc?sgn(res/tc*100)+"%":"";cls(tp,res);
+ document.getElementById("warn").textContent=miss?(miss===1?"1 activo con datos incompletos no está incluido en los totales.":miss+" activos con datos incompletos no están incluidos en los totales."):"";
+}
+var fe=document.getElementById("fecha");fe.value=S.fecha||"";
+fe.addEventListener("input",function(){S.fecha=fe.value;save();});
+
+document.getElementById("add").addEventListener("click",function(){
+ S.rows.push({t:"",n:"",pc:"",pa:"",k:""});render();save();
+ var ins=rowsEl.querySelectorAll(".f.t input");if(ins.length)ins[ins.length-1].focus();
+});
+document.getElementById("load").addEventListener("click",function(){
+ var ta=document.getElementById("paste"),added=0;
+ ta.value.split(/\r?\n/).forEach(function(line){
+  var c=line.trim().split(/[\t;\s]+/);
+  if(c.length<3||!isFinite(num(c[1])))return;
+  S.rows.push({t:c[0].toUpperCase(),n:c[1],pc:c[2],pa:c[3]||"",k:kindOf(c[4])});added++;
+ });
+ if(added){ta.value="";document.getElementById("pd").open=false;render();save();}
+});
+var CAT=[],MAP={};
+var KL={tp:"Título público",on:"Oblig. negociable",ac:"Acción / CEDEAR"};
+var ML={ARS:"pesos",USD:"USD",EXT:"USD CCL"};
+function px(v){return String(v).replace(".",",");}
+function attachSug(w,i,r){
+ var box=document.createElement("div");box.className="sug";box.hidden=true;w.appendChild(box);
+ function hide(){box.hidden=true;}
+ i.addEventListener("input",function(){
+  var q=i.value.trim().toUpperCase();box.innerHTML="";
+  if(!q||!CAT.length){hide();return;}
+  var m=CAT.filter(function(x){return x[0].indexOf(q)===0;}).slice(0,8);
+  if(m.length<8)CAT.forEach(function(x){if(m.length<8&&x[0].indexOf(q)>0)m.push(x);});
+  if(!m.length){hide();return;}
+  m.forEach(function(x){
+   var b=document.createElement("button");b.type="button";
+   var s=document.createElement("strong");s.textContent=x[0];
+   var sm=document.createElement("small");sm.textContent=" · "+KL[x[1]]+" · "+(ML[x[2]]||x[2]);
+   b.appendChild(s);b.appendChild(sm);
+   b.addEventListener("click",function(){r.t=x[0];r.k=x[1];r.pa=px(x[3]);render();save();});
+   box.appendChild(b);
+  });
+  box.hidden=false;
+ });
+ i.addEventListener("blur",function(){setTimeout(hide,200);});
+}
+function fechaAR(s){var p=String(s||"").split("-");return p.length===3?p[2]+"/"+p[1]+"/"+p[0]:s;}
+var st=document.getElementById("stat");
+fetch("data.json",{cache:"no-store"}).then(function(x){if(!x.ok)throw 0;return x.json();}).then(function(d){
+ CAT=d.items||[];CAT.forEach(function(x){MAP[x[0]]=x;});
+ var n=0;
+ S.rows.forEach(function(r){var x=MAP[r.t];if(x){r.k=x[1];r.pa=px(x[3]);n++;}});
+ if(d.fecha){S.fecha=d.fecha;fe.value=d.fecha;}
+ st.textContent="Precios de cierre de BYMA al "+fechaAR(d.fecha)+(n?" · actualizados en "+n+(n===1?" activo.":" activos."):".");
+ render();save();
+}).catch(function(){
+ st.textContent="No se pudo cargar la lista de precios de BYMA. Podés cargar los precios a mano.";
+});
+render();
+})();
+</script>
+</body>
+</html>
